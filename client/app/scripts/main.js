@@ -1,6 +1,9 @@
 console.log('\'Allo \'Allo!');
 
 (function($, Modernizr) {
+    var $log = $('.log');
+    var clickMessage = '<div>clicked!!</div>';
+    var touchMessage = '<div>touched on mobile device!!</div>';
 /*    var $log = $('.log');
     var $button = $('#click');
     var clickMessage = '<div>clicked!!</div>';
@@ -23,31 +26,49 @@ console.log('\'Allo \'Allo!');
         $log.html($log.html() + mousedownMessage);
     });
 */
-     var promo = '#app-promo';
+    AddMessageToLog(Modernizr.touch);
 
-    $('.flightapps').on('click', function () {
-        if ($(promo).position().top == -300) {
+    var promo = '#app-promo';
+    var $promo = $(promo);
+    var $trigger = $('.flightapps');
+
+    function AddMessageToLog(message) {
+        var messageTag = '<div>' + message + '</div>';
+        $log.html($log.html() + messageTag);
+    }
+    $trigger.on('click', function () {
+        AddMessageToLog('Clicked!!');
+        if ($promo.position().top == -300) {
+            AddMessageToLog('Expanding!!');
             $(this).addClass('appButtonSelected');
-            $(promo).animate({
+            $promo.animate({
                 top: 0
             });
         }
 
-        if ($(promo).position().top == 0) {
+        if ($promo.position().top == 0) {
+            AddMessageToLog('Collapsing!!');
             $(this).removeClass('appButtonSelected');
-            $(promo).animate({
+            $promo.animate({
                 top: -300
             });
         }
     });
 
     $(document).on('click', function (event) {
-        if ($(promo).position().top == 0) {
-            if (!$(event.target).parents('#app-promo').length) {
-                $(promo).animate({
-                    top: -300
-                });
-                $('.flightapps').removeClass('appButtonSelected');
+        var target = event.target;
+        console.log(event.target);
+        console.log($trigger.get(0))
+        if (event.target != $trigger.get(0)) {
+            if ($promo.position().top == 0) {
+                console.log($(event.target));
+                AddMessageToLog('Collapsing!!');
+                if (!$(event.target).parents('#app-promo').length) {
+                    $promo.animate({
+                        top: -300
+                    });
+                    $trigger.removeClass('appButtonSelected');
+                }
             }
         }
     });
