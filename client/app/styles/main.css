@@ -6,7 +6,7 @@
 
 body {
     background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
     background: lightblue;
 }
@@ -38,7 +38,11 @@ body {
 
 .log {
     position: fixed;
-    bottom: 10px;
+    bottom: 0;
+    padding: 10px;
+    border: 1px solid #666;
+    width: 100%;
+    border-radius: 5px;
 }
 
 #app-promo .flightapps {
