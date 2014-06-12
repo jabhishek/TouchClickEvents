@@ -36,13 +36,19 @@ body {
     color:#12315f; /* TODO: change this color value to the official one */
 }
 
-.log {
+#log {
     position: fixed;
     bottom: 0;
     padding: 10px;
     border: 1px solid #666;
     width: 100%;
     border-radius: 5px;
+}
+
+#clearLog {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
 }
 
 #app-promo .flightapps {
