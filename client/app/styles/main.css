@@ -43,10 +43,11 @@ body {
     border: 1px solid #666;
     width: 100%;
     border-radius: 5px;
+    height: 50%;
 }
 
 .log {
-    height: 500px;
+    height: 100%;
     overflow: scroll;
 }
 

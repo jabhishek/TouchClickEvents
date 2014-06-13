@@ -84,25 +84,47 @@ console.log('\'Allo \'Allo!');
         });
     }
     if (Modernizr.touch) {
+        var touchCount = 0;
+        var startY, lastY;
         $trigger.on('touchstart', function(e) {
-            e.preventDefault();
+            e.preventDefault(); 
+            startY = e.originalEvent.changedTouches[0].pageY;
+            if (isPanelCollapsed()) {
+                if (touchCount === 0) {
+                    AddMessageToLog('Selecting!!', "red");
+                    $trigger.addClass('appButtonSelected');
+                    touchCount = 1;
+                } else {
+                    if (touchCount > 0) {
+                        AddMessageToLog('Expanding on touch!!', "red");
+                        expandPanel();
+                        touchCount = 0;
+                    }
+                }
+            } else {
+                AddMessageToLog('Collapse on touch!!', "red");
+                collapsePanel();
+            }
             AddMessageToLog('touch start!!', "blue");
-            AddMessageToLog("Touch Start Y: " + e.originalEvent.changedTouches[0].pageY, "blue")
+            AddMessageToLog("Touch Start Y: " + e.originalEvent.changedTouches[0].pageY, "green")
 
         })
-        var lastY;
+
         $trigger.on('touchmove', function(e) {
             // check if moving down or up
+            lastY = startY;
             e.preventDefault();
             AddMessageToLog('touch move!!', "blue");
             var currentY = e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY;
-            //AddMessageToLog("Current Y: " + currentY + ", lastY: " + lastY, "green");
+            AddMessageToLog("Current Y: " + currentY + ", lastY: " + lastY, "green");
             if (currentY > lastY) {
                 if (isPanelCollapsed()) {
+                    AddMessageToLog('Expanding on move!!', "red");
                     expandPanel();    
                 }
-            } else {
+            } else if (currentY < lastY){
                 if (isPanelExpanded()) {
+                    AddMessageToLog('Collapse on move!!', "red");
                     collapsePanel();
                 }
             }
@@ -113,7 +135,7 @@ console.log('\'Allo \'Allo!');
         $trigger.on('touchend', function(e) {
             e.preventDefault();
             AddMessageToLog('touch end!!', "blue");
-            AddMessageToLog("Touch End Y: " + e.originalEvent.changedTouches[0].pageY, "blue")
+      //      AddMessageToLog("Touch End Y: " + e.originalEvent.changedTouches[0].pageY, "blue")
         })
     }
 
