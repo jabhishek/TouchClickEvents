@@ -39,7 +39,6 @@ console.log('\'Allo \'Allo!');
         className = className ? className : ""
         var messageTag = '<div class="message ' + 
             className + '">' + message + '</div>';
-        console.log(className);
         $log.html($log.html() + messageTag);
     }
 
@@ -107,8 +106,6 @@ console.log('\'Allo \'Allo!');
             }
             lastY = currentY;
             //AddMessageToLog("Current Y: " + currentY + ", lastY: " + lastY, "green");
-            console.log(e);
-
         })
 
         $trigger.on('touchend', function(e) {
@@ -123,7 +120,6 @@ console.log('\'Allo \'Allo!');
         //AddMessageToLog(documentEventTrigger);
         if (event.target != $trigger.get(0)) {
             if (isPanelExpanded()) {
-                console.log($(event.target));
                 if (!$(event.target).parents('#app-promo').length) {
                     collapsePanel();
                 }
