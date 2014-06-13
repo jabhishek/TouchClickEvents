@@ -91,7 +91,9 @@ console.log('\'Allo \'Allo!');
         var lastY;
         $trigger.on('touchmove', function(e) {
             // check if moving down or up
+
             var currentY = e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY;
+            AddMessageToLog("Current Y: " + currentY + ", lastY: " + lastY, "green");
             if (currentY > lastY) {
                 if (isPanelCollapsed()) {
                     expandPanel();    

@@ -45,6 +45,11 @@ body {
     border-radius: 5px;
 }
 
+.log {
+    height: 500px;
+    overflow: scroll;
+}
+
 #clearLog {
     position: absolute;
     right: 5px;
@@ -72,4 +77,8 @@ body {
 
 .message.blue {
     color: blue;
+}
+
+.message.green {
+    color: green;
 }
