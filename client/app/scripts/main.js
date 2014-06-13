@@ -85,15 +85,17 @@ console.log('\'Allo \'Allo!');
         });
     }
     if (Modernizr.touch) {
-        $trigger.on('touchstart', function() {
+        $trigger.on('touchstart', function(e) {
             AddMessageToLog('touch start!!', "blue");
+            AddMessageToLog("Touch Start Y: " + e.originalEvent.changedTouches[0].pageY + "blue")
+
         })
         var lastY;
         $trigger.on('touchmove', function(e) {
             // check if moving down or up
-
+            //AddMessageToLog('touch move!!', "blue");
             var currentY = e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY;
-            AddMessageToLog("Current Y: " + currentY + ", lastY: " + lastY, "green");
+            //AddMessageToLog("Current Y: " + currentY + ", lastY: " + lastY, "green");
             if (currentY > lastY) {
                 if (isPanelCollapsed()) {
                     expandPanel();    
@@ -104,12 +106,14 @@ console.log('\'Allo \'Allo!');
                 }
             }
             lastY = currentY;
+            //AddMessageToLog("Current Y: " + currentY + ", lastY: " + lastY, "green");
             console.log(e);
-            AddMessageToLog('touch move!!', "blue");
+
         })
 
-        $trigger.on('touchend', function() {
-          //  AddMessageToLog('touch end!!', "blue");
+        $trigger.on('touchend', function(e) {
+            AddMessageToLog('touch end!!', "blue");
+            AddMessageToLog("Touch End Y: " + e.originalEvent.changedTouches[0].pageY + "blue")
         })
     }
 
