@@ -35,13 +35,16 @@ console.log('\'Allo \'Allo!');
     
     $promo.addClass('collapsed');
 
-    function AddMessageToLog(message) {
-        var messageTag = '<div>' + message + '</div>';
+    function AddMessageToLog(message, className) {
+        className = className ? className : ""
+        var messageTag = '<div class="message ' + 
+            className + '">' + message + '</div>';
+        console.log(className);
         $log.html($log.html() + messageTag);
     }
 
     function expandPanel() {
-        AddMessageToLog('Expanding!!');
+        AddMessageToLog('Expanding!!', "red");
         $promo.removeClass('collapsed').promise().done(function() {
             $trigger.addClass('appButtonSelected');
             $promo.animate({
@@ -52,7 +55,7 @@ console.log('\'Allo \'Allo!');
 
     function collapsePanel() {
 
-        AddMessageToLog('Collapsing!!');
+        AddMessageToLog('Collapsing!!', "red");
         $promo.addClass('collapsed').promise().done(function() {
             $trigger.removeClass('appButtonSelected');
             $promo.animate({
@@ -73,19 +76,17 @@ console.log('\'Allo \'Allo!');
 
     if (!Modernizr.touch) {
         $trigger.on('click', function () {
-            AddMessageToLog('Clicked!!');
+            AddMessageToLog('Clicked!!', 'blue');
             if (isPanelCollapsed()) {
                 expandPanel();
-            }
-
-            if (isPanelExpanded()) {
+            } else {
                 collapsePanel();
             }
         });
     }
     if (Modernizr.touch) {
         $trigger.on('touchstart', function() {
-         //   AddMessageToLog('touch start!!');
+            AddMessageToLog('touch start!!', "blue");
         })
         var lastY;
         $trigger.on('touchmove', function(e) {
@@ -102,11 +103,11 @@ console.log('\'Allo \'Allo!');
             }
             lastY = currentY;
             console.log(e);
-          //  AddMessageToLog('touch move!!');
+            AddMessageToLog('touch move!!', "blue");
         })
 
         $trigger.on('touchend', function() {
-          //  AddMessageToLog('touch end!!');
+          //  AddMessageToLog('touch end!!', "blue");
         })
     }
 
