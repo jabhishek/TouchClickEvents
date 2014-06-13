@@ -85,13 +85,15 @@ console.log('\'Allo \'Allo!');
     }
     if (Modernizr.touch) {
         $trigger.on('touchstart', function(e) {
+            e.preventDefault();
             AddMessageToLog('touch start!!', "blue");
-            AddMessageToLog("Touch Start Y: " + e.originalEvent.changedTouches[0].pageY + "blue")
+            AddMessageToLog("Touch Start Y: " + e.originalEvent.changedTouches[0].pageY, "blue")
 
         })
         var lastY;
         $trigger.on('touchmove', function(e) {
             // check if moving down or up
+            e.preventDefault();
             AddMessageToLog('touch move!!', "blue");
 /*            var currentY = e.originalEvent.touches ? e.originalEvent.touches[0].pageY : e.pageY;
             //AddMessageToLog("Current Y: " + currentY + ", lastY: " + lastY, "green");
@@ -109,8 +111,9 @@ console.log('\'Allo \'Allo!');
         })
 
         $trigger.on('touchend', function(e) {
+            e.preventDefault();
             AddMessageToLog('touch end!!', "blue");
-            AddMessageToLog("Touch End Y: " + e.originalEvent.changedTouches[0].pageY + "blue")
+            AddMessageToLog("Touch End Y: " + e.originalEvent.changedTouches[0].pageY, "blue")
         })
     }
 
